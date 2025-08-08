@@ -27,7 +27,7 @@ def get_psychopy_info(
     **kwargs,
 ):
     reward_feedback = FeedBackStimulus(
-        1.0, text="{0}", target="reward", name="reward", bar_total=fullpoints
+        1.0, text="{0}", target="reward", name="reward", bar_total=fullpoints, rl_label="reward"
     )
 
     base_stim_iti = ImageStimulus(
@@ -52,8 +52,9 @@ def get_psychopy_info(
                     {0: ["?"]},
                     name="cue",
                     duration=0.00,
+                    rl_label="obs",
                 ),
-                ActionStimulus(duration=1.5, key_dict=key_dict),
+                ActionStimulus(duration=1.5, key_dict=key_dict, rl_label="action"),
             ]
         },
         1: {
@@ -63,6 +64,7 @@ def get_psychopy_info(
                     "{0}",
                     condition_text={1: [1, 2, 3, 4], -0.5: [6, 7, 8, 9], 0: [5]},
                     name="selection",
+                    rl_label="obs"
                 ),
                 reward_feedback,
                 base_stim_iti,
@@ -75,6 +77,7 @@ def get_psychopy_info(
                     "{0}",
                     condition_text={-0.5: [1, 2, 3, 4], 1: [6, 7, 8, 9], 0: [5]},
                     name="selection",
+                    rl_label="obs"
                 ),
                 reward_feedback,
                 base_stim_iti,
