@@ -5,7 +5,7 @@ except ImportError:
 
 
 def get_configs(stimulus_set: str = "1"):
-    seed = check_random_state(int(stimulus_set))
+    random_state = check_random_state(int(stimulus_set))
     condition_dict = {
         "win": {"reward": 1},
         "lose": {"reward": -0.5},
@@ -21,21 +21,21 @@ def get_configs(stimulus_set: str = "1"):
     win3 = ["win", "win", "win", "win", "win", "win", "neutral", "lose"]
 
     block_order_win = (
-        seed.permutation([win1, win2, win3]).tolist()
-        + seed.choice([win1, win2, win3], size=1, replace=True).tolist()
+        random_state.permutation([win1, win2, win3]).tolist()
+        + random_state.choice([win1, win2, win3], size=1, replace=True).tolist()
     )
 
     block_order_lose = (
-        seed.permutation([lose1, lose2, lose3]).tolist()
-        + seed.choice([lose1, lose2, lose3], size=1, replace=False).tolist()
+        random_state.permutation([lose1, lose2, lose3]).tolist()
+        + random_state.choice([lose1, lose2, lose3], size=1, replace=False).tolist()
     )
 
-    block_order1 = seed.permutation(block_order_win[:2] + block_order_lose[:2]).tolist()
-    block_order2 = seed.permutation(block_order_win[2:] + block_order_lose[2:]).tolist()
+    block_order1 = random_state.permutation(block_order_win[:2] + block_order_lose[:2]).tolist()
+    block_order2 = random_state.permutation(block_order_win[2:] + block_order_lose[2:]).tolist()
 
     conditions = []
     for block in block_order1 + block_order2:
-        conditions.extend(seed.choice(block, size=8, replace=False).tolist())
+        conditions.extend(random_state.choice(block, size=8, replace=False).tolist())
 
     config = {
         "name": "hcp",

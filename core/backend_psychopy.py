@@ -20,7 +20,7 @@ except ImportError:
 
 
 def get_psychopy_info(
-    seed=111,
+    random_state=111,
     key_dict={"left": 0, "right": 1},
     external_stimuli=None,
     fullpoints=None,
