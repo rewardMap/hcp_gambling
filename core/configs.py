@@ -1,11 +1,11 @@
 try:
-    from rewardgym.utils import check_seed
+    from rewardgym.utils import check_random_state
 except ImportError:
-    from ....utils import check_seed
+    from ....utils import check_random_state
 
 
 def get_configs(stimulus_set: str = "1"):
-    seed = check_seed(int(stimulus_set))
+    seed = check_random_state(int(stimulus_set))
     condition_dict = {
         "win": {"reward": 1},
         "lose": {"reward": -0.5},
