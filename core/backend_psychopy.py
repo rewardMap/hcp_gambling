@@ -1,22 +1,11 @@
-try:
-    from ....psychopy_render import (
-        ImageStimulus,
-        FeedBackStimulus,
-        TextWithBorder,
-        ActionStimulus,
-    )
+from rewardgym.psychopy_render import (
+    ImageStimulus,
+    FeedBackStimulus,
+    TextWithBorder,
+    ActionStimulus,
+)
 
-    from ....stimuli import fixation_cross
-
-except ImportError:
-    from rewardgym.psychopy_render import (
-        ImageStimulus,
-        FeedBackStimulus,
-        TextWithBorder,
-        ActionStimulus,
-    )
-
-    from rewardgym.stimuli import fixation_cross
+from rewardgym.stimuli import fixation_cross
 
 
 def get_psychopy_info(
