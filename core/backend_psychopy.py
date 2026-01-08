@@ -24,6 +24,7 @@ def get_psychopy_info(
         duration=1.5,
         autodraw=True,
         name="iti",
+        rl_label='obs'
     )
 
     wait_after_response = ImageStimulus(
@@ -40,7 +41,7 @@ def get_psychopy_info(
                     "{0}",
                     {0: ["?"]},
                     name="cue",
-                    duration=0.00,
+                    duration=None,
                     rl_label="obs",
                 ),
                 ActionStimulus(duration=1.5, key_dict=key_dict, rl_label="action"),
@@ -53,7 +54,7 @@ def get_psychopy_info(
                     "{0}",
                     condition_text={1: [1, 2, 3, 4], -0.5: [6, 7, 8, 9], 0: [5]},
                     name="selection",
-                    rl_label="obs"
+                    duration=1.0,
                 ),
                 reward_feedback,
                 base_stim_iti,
@@ -66,7 +67,7 @@ def get_psychopy_info(
                     "{0}",
                     condition_text={-0.5: [1, 2, 3, 4], 1: [6, 7, 8, 9], 0: [5]},
                     name="selection",
-                    rl_label="obs"
+                    duration=1.0,
                 ),
                 reward_feedback,
                 base_stim_iti,
