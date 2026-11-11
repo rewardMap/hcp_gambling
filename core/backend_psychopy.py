@@ -6,6 +6,8 @@ from rewardgym.psychopy_render import (
 )
 
 from rewardgym.stimuli import fixation_cross
+from rewardgym.render.passive_routines import PresentationRoutine, ConditionedTextCard, FeedBackRoutine
+from rewardgym.render import ImageDefinition, TextDefinition, RectangleDefinition
 
 
 def get_psychopy_info(
@@ -15,43 +17,70 @@ def get_psychopy_info(
     fullpoints=None,
     **kwargs,
 ):
-    reward_feedback = FeedBackStimulus(
-        1.0, text="{0}", target="reward", name="reward", bar_total=fullpoints, rl_label="reward"
+    reward_feedback = FeedBackRoutine(
+        duration=1.0, name="reward", bar_total=fullpoints, rl_label="reward"
     )
 
-    base_stim_iti = ImageStimulus(
-        image_paths=[fixation_cross()],
+    base_stim_iti = PresentationRoutine(
+        stimulus_definitions=[
+            ImageDefinition(
+                name="fixation",
+                autoDraw=True,
+                image=fixation_cross()
+            )
+        ],
         duration=1.5,
-        autodraw=True,
         name="iti",
         rl_label='obs'
     )
 
-    wait_after_response = ImageStimulus(
-        image_paths=[fixation_cross()],
+    wait_after_response = PresentationRoutine(
+        stimulus_definitions=[
+            ImageDefinition(
+                name="fixation",
+                autoDraw=True,
+                image=fixation_cross()
+            )
+        ],
         duration=1.5,
-        autodraw=True,
         name="delay",
     )
+
+    rectangle =                         RectangleDefinition(
+                            name="rect",
+                            autoDraw=False,
+                            width=250,
+                            height=350,
+                            fillColor="grey",
+                            lineColor="white",
+                            lineWidth=3
+                        )
+    text = TextDefinition(
+                        name="text",
+                        autoDraw=False,
+                        height=150,
+                        text="?",
+                        color="white")
 
     info_dict = {
         0: {
             "psychopy": [
-                TextWithBorder(
-                    "{0}",
-                    {0: ["?"]},
-                    name="cue",
-                    duration=None,
-                    rl_label="obs",
-                ),
+                PresentationRoutine(
+                    stimulus_definitions=[
+                        rectangle, text],
+                        name="cue",
+                        duration=None,
+                        rl_label="obs"
+                    ),
                 ActionStimulus(duration=1.5, key_dict=key_dict, rl_label="action"),
             ]
         },
         1: {
             "psychopy": [
                 wait_after_response,
-                TextWithBorder(
-                    "{0}",
+                ConditionedTextCard(
+                    text_definition= text,
+                    background_definition= rectangle,
                     condition_text={1: [1, 2, 3, 4], -0.5: [6, 7, 8, 9], 0: [5]},
                     name="selection",
                     duration=1.0,
@@ -63,9 +92,10 @@ def get_psychopy_info(
         2: {
             "psychopy": [
                 wait_after_response,
-                TextWithBorder(
-                    "{0}",
-                    condition_text={-0.5: [1, 2, 3, 4], 1: [6, 7, 8, 9], 0: [5]},
+                ConditionedTextCard(
+                    text_definition= text,
+                    background_definition= rectangle,
+                    condition_text={1: [1, 2, 3, 4], -0.5: [6, 7, 8, 9], 0: [5]},
                     name="selection",
                     duration=1.0,
                 ),
