@@ -1,17 +1,17 @@
 try:
-    from psychopy.visual import ImageStim, TextBox2, Rect, TextStim
+    from psychopy.visual import ImageStim, Rect, TextBox2, TextStim
 except ModuleNotFoundError:
     from rewardgym.psychopy_render.psychopy_stubs import (
         ImageStim,
-        TextBox2,
         Rect,
+        TextBox2,
         TextStim,
     )
 
-from rewardgym.stimuli import zero_cross, win_cross, lose_cross
-
 import json
 import pathlib
+
+from rewardgym.stimuli import lose_cross, win_cross, zero_cross
 
 instructions_path = (
     pathlib.Path(__file__).parent.resolve() / "assets" / "instructions_en.json"

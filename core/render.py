@@ -1,15 +1,22 @@
-from rewardgym.stimuli import fixation_cross
-from rewardgym.render.passive_routines import PresentationRoutine, ConditionedTextCard, FeedBackRoutine
-from rewardgym.render import ImageDefinition, TextDefinition, RectangleDefinition
+from rewardgym.render import ImageDefinition, RectangleDefinition, TextDefinition
+from rewardgym.render.passive_routines import (
+    ConditionedTextCard,
+    FeedBackRoutine,
+    PresentationRoutine,
+)
 from rewardgym.render.response_routines import ActionRoutine
+from rewardgym.stimuli import fixation_cross
 
-def get_psychopy_info(
+
+def get_render_info(
     random_state=111,
-    key_dict={"left": 0, "right": 1},
+    key_dict=None,
     external_stimuli=None,
     fullpoints=None,
     **kwargs,
 ):
+    if key_dict is None:
+        key_dict = {"left": 0, "right": 1}
     reward_feedback = FeedBackRoutine(
         duration=1.0, name="reward", bar_total=fullpoints, rl_label="reward"
     )

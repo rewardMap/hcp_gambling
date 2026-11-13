@@ -1,5 +1,5 @@
 import pathlib
-from typing import Literal, Union
+from typing import Literal
 
 import numpy as np
 
@@ -9,8 +9,8 @@ from rewardgym.tasks.yaml_tools import load_task_from_yaml
 
 
 def get_task(
-    render_backend: Literal["pygame", "psychopy"] = None,
-    random_state: Union[int, np.random.Generator] = 1000,
+    render_backend: Literal["pygame", "psychopy"] | None = None,
+    random_state: int | np.random.Generator = 1000,
     key_dict=None,
     **kwargs,
 ):
@@ -24,23 +24,16 @@ def get_task(
     }
 
     info_dict.update({"condition": {0: "lose", 1: "neutral", 2: "win"}})
-    action_map = {}
 
-    if render_backend == "pygame":
-        from .backend_pygame import get_pygame_info
-
-        pygame_dict = get_pygame_info(action_map)
-        info_dict.update(pygame_dict)
-
-    elif render_backend == "psychopy" or render_backend == "psychopy-simulate":
-        from .backend_psychopy import get_psychopy_info
+    if render_backend is not None:
+        from .render import get_render_info
 
         if key_dict is None:
             key_dict = {"left": 0, "right": 1}
 
-        psychopy_dict, _ = get_psychopy_info(
+        render_dict, _ = get_render_info(
             random_state=random_state, key_dict=key_dict, fullpoints=info_dict["meta"]["fullpoints"]
         )
-        info_dict.update(psychopy_dict)
+        info_dict.update(render_dict)
 
     return environment_graph, reward_structure, info_dict
