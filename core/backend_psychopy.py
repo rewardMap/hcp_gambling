@@ -1,14 +1,7 @@
-from rewardgym.psychopy_render import (
-    ImageStimulus,
-    FeedBackStimulus,
-    TextWithBorder,
-    ActionStimulus,
-)
-
 from rewardgym.stimuli import fixation_cross
 from rewardgym.render.passive_routines import PresentationRoutine, ConditionedTextCard, FeedBackRoutine
 from rewardgym.render import ImageDefinition, TextDefinition, RectangleDefinition
-
+from rewardgym.render.response_routines import ActionRoutine
 
 def get_psychopy_info(
     random_state=111,
@@ -72,7 +65,7 @@ def get_psychopy_info(
                         duration=None,
                         rl_label="obs"
                     ),
-                ActionStimulus(duration=1.5, key_dict=key_dict, rl_label="action"),
+                ActionRoutine(name="response", duration=1.5, key_dict=key_dict, rl_label="action", flip=False),
             ]
         },
         1: {
