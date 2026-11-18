@@ -64,7 +64,7 @@ def get_render_info(
 
     info_dict = {
         0: {
-            "psychopy": [
+            "render": [
                 PresentationRoutine(
                     stimulus_definitions=[
                         rectangle, text],
@@ -76,7 +76,7 @@ def get_render_info(
             ]
         },
         1: {
-            "psychopy": [
+            "render": [
                 wait_after_response,
                 ConditionedTextCard(
                     text_definition= text,
@@ -90,7 +90,7 @@ def get_render_info(
             ]
         },
         2: {
-            "psychopy": [
+            "render": [
                 wait_after_response,
                 ConditionedTextCard(
                     text_definition= text,
