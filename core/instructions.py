@@ -1,11 +1,14 @@
-from rewardgym.render.routines.passive_routines import InstructionRoutine
-from rewardgym.render.stimulus_definitions import TextDefinition, ImageDefinition, RectangleDefinition
-from rewardgym.utils import NameCounter
-
 import json
 import pathlib
 
+from rewardgym.render.routines.passive_routines import InstructionRoutine
 from rewardgym.render.stimuli import lose_cross, win_cross, zero_cross
+from rewardgym.render.stimulus_definitions import (
+    ImageDefinition,
+    RectangleDefinition,
+    TextDefinition,
+)
+from rewardgym.utils import NameCounter
 
 instructions_path = (
     pathlib.Path(__file__).parent.resolve() / "assets" / "instructions_en.json"

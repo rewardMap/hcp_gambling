@@ -1,10 +1,10 @@
 from rewardgym.render import ImageDefinition, RectangleDefinition, TextDefinition
 from rewardgym.render.routines import (
+    ActionRoutine,
     ConditionedTextCard,
     FeedBackRoutine,
     PresentationRoutine,
 )
-from rewardgym.render.routines import ActionRoutine
 from rewardgym.render.stimuli import fixation_cross
 
 
